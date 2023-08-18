@@ -1,0 +1,81 @@
+:root {
+  --vt-c-white: #ffffff;
+  --vt-c-white-soft: #f8f8f8;
+  --vt-c-white-mute: #f2f2f2;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--color-text);
+  background: var(--color-background);
+  transition:
+    color 0.5s,
+    background-color 0.5s;
+  line-height: 1.6;
+  font-family:
+    'Outfit'
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+  font-size: 14px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Outfit Bold */
+@font-face {
+  font-family: 'Outfit';
+  src: url('../../public/fonts/Outfit-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* Outfit Semibold */
+@font-face {
+  font-family: 'Outfit';
+  src: url('../../public/fonts/Outfit-Semibold.ttf') format('truetype');
+  font-weight: 600; /* Use 600 for semibold */
+  font-style: normal;
+}
+
+/* Outfit Light */
+@font-face {
+  font-family: 'Outfit';
+  src: url('../../public/fonts/Outfit-Light.ttf') format('truetype');
+  font-weight: lighter; /* Use lighter for light */
+  font-style: normal;
+}
+
+/* Outfit Regular */
+@font-face {
+  font-family: 'Outfit';
+  src: url('../../public/fonts/Outfit-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Outfit Medium */
+@font-face {
+  font-family: 'Outfit';
+  src: url('../../public/fonts/Outfit-Medium.ttf') format('truetype');
+  font-weight: 500; /* Use 500 for medium */
+  font-style: normal;
+}
