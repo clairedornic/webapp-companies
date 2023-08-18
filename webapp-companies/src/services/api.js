@@ -6,15 +6,20 @@ const apiClient = axios.create({
 });
 
 export default {
-  getCompanies(params) {
-    return apiClient.get('/companies', { params });
-  },
 
-  getCompanyById(id) {
-    return apiClient.get(`/companies/${id}`);
-  },
+    getCountCompanies() {
+        return apiClient.get('/companies/count');
+    },
 
-  getCompanyEstablishments(id) {
-    return apiClient.get(`/establishments/company/${id}`);
-  },
+    getCompanies(params) {
+        return apiClient.get('/companies', { params });
+    },
+
+    getCompanyById(id) {
+        return apiClient.get(`/companies/${id}`);
+    },
+
+    getCompanyEstablishments(id) {
+        return apiClient.get(`/establishments/company/${id}`);
+    },
 };
