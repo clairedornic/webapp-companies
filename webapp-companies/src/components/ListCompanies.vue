@@ -1,7 +1,13 @@
 <template>
     <div>
+        <n-input
+            v-model:value="searchText"
+            type="text"
+            placeholder="Search companies by name"
+            @input="updateSearchText"
+        />
         <ul class="grid-card">
-            <n-card v-for="company in companies" :key="company.id">
+            <n-card v-for="company in filteredCompanies" :key="company.id">
                 <template #cover>
                     <img src="https://picsum.photos/300/175">
                 </template>
@@ -21,38 +27,51 @@
         </ul>
     </div>
 </template>
-<script>
+<script setup>
+import { ref, onMounted, computed  } from 'vue';
 import api from '@/services/api.js';
-import { NCard, NButton } from 'naive-ui'
+import { useRouter } from 'vue-router';
+import { NCard, NButton, NInput } from 'naive-ui';
 
-export default {
-  data() {
-    return {
-      companies: [],
-    };
-  },
-  mounted() {
-    this.fetchCompanies();
-  },
-  methods: {
-    async fetchCompanies() {
-      try {
-        const response = await api.getCompanies();
-        this.companies = response.data;
-        console.log(this.companies);
-      } catch (error) {
-        console.error('Error fetching companies:', error);
-      }
-    },
-    handleClick(companyId) {
-      this.$router.push({ name: 'CompanyDetails', params: { id: companyId } });
-    },
-  },
-  components: {
-    NCard,
-    NButton
-  },
+const searchText = ref('');
+const companies = ref([]);
+const debounceTimer = ref(null);
+const router = useRouter();
+
+const fetchCompanies = async (nameCompany) => {
+  try {
+    const response = await api.getCompanies({ name: nameCompany });
+    companies.value = response.data;
+  } catch (error) {
+    console.error('Error fetching companies:', error);
+  }
 };
+
+const updateSearchText = () => {
+  clearTimeout(debounceTimer.value);
+  debounceTimer.value = setTimeout(() => {
+    fetchCompanies(searchText.value.toLowerCase());
+  }, 300);
+};
+
+onMounted(() => {
+  fetchCompanies();
+});
+
+const filteredCompanies = computed(() => {
+  if (!searchText.value) {
+    return companies.value;
+  }
+  const searchTerm = searchText.value.toLowerCase();
+  return companies.value.filter(company =>
+    company.name.toLowerCase().includes(searchTerm)
+  );
+});
+
+const handleClick = (companyId) => {
+    router.push({ name: 'CompanyDetails', params: { id: companyId } });
+};
+
 </script>
 <style scoped>
     .grid-card {
