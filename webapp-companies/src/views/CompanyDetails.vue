@@ -34,8 +34,6 @@
     isLoading.value = true;
     companyData.value = await getCompanyById(id.value);
     companyEstablishments.value = await getCompanyEstablishmentsById(id.value);
-    console.log(companyData.value);
-    console.log(companyEstablishments.value);
     isLoading.value = false;
   };
 
